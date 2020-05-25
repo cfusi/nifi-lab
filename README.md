@@ -97,6 +97,9 @@ It will run in NiFi as a standard (aka stateful) flow.
 Connect to NiFi and create the Process Group `flow1_pg`:
 ![Process Group flow1_pg](images/flow1_pg.png)
 
+Configure the GenerateFlowFile processor with the following values:
+- Scheduling -> Run Schedule -> 5 sec
+
 The PublishKafka_2_0 processor has the following properties:
 ![flow_1_PublishKafka](images/flow_1_PublishKafka.png)
 
