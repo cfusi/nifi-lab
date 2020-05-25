@@ -141,10 +141,10 @@ The flow is defined in the NiFi Registry and the stateless instance is configure
     [Create a bucket](https://nifi.apache.org/docs/nifi-registry-docs/html/getting-started.html#create-a-bucket)
 - Start the version control for `flow2`: right click on `flow2_pg` and `Version -> Start version control` and specify the following values:
 ![Start version control](images/version_stateless_flow.png)
-- In the UI of NiFi Registry, open the versioned flow and get the flow ID and the bucket ID:
+- In the NiFi Registry UI, open the versioned flow and get the flow ID and the bucket ID:
 ![Registry IDs](images/registry_ids.png)
 
-- Create the file `flow.json` with the following content using the current values for the bucketId and the flowId:
+- Create the file `flow.json` with the following content using the current values for the registry URL, bucketId and the flowId:
 ```
 {
   "registryUrl": "http://nifi-registry:18080",
@@ -167,8 +167,8 @@ Now the stateless NiFi flow is active.
 
 You can now access the NiFi UI and start:
 - flow1_pg: to populate `topic1`
-- flow2_pg: to verify that the stateless NiFi instance is actually consuming from the topic `topic1` and publishing to the topic `topic2`.
+- flow3_pg: to verify that the stateless NiFi instance is actually consuming from the topic `topic1` and publishing to the topic `topic2`.
 
-If it worked, you will see messages only queue present in the process group `flow3_pg`
+If it worked, you will see messages in the queue in the process group `flow3_pg`
 ![Check](images/check.png)
 9 messages in this picture.
