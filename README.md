@@ -139,7 +139,7 @@ The flow is defined in the NiFi Registry and the stateless instance is configure
 - Connect to the NiFi Registry UI and create a bucket named `stateless` are described here:
     
     [Create a bucket](https://nifi.apache.org/docs/nifi-registry-docs/html/getting-started.html#create-a-bucket)
-- Start the version control for `flow2` (right click on `flow2_pg` and `Version -> Start version control` and specify the following values:
+- Start the version control for `flow2`: right click on `flow2_pg` and `Version -> Start version control` and specify the following values:
 ![Start version control](images/version_stateless_flow.png)
 - In the UI of NiFi Registry, open the versioned flow and get the flow ID and the bucket ID:
 ![Registry IDs](images/registry_ids.png)
