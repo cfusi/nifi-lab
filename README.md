@@ -68,6 +68,7 @@ These steps create the needed docker containers:
     docker run \
       --name nifi-registry \
       --hostname nifi-registry \
+      --network nifi-net \
       -p 18080:18080 \
       -d \
       apache/nifi-registry:latest
@@ -124,3 +125,20 @@ Connect to NiFi and create the Process Group `flow3_pg`:
 
 The Kafka consumer is configured as follows:
 ![flow_3_ConsumeKafka](images/flow_3_ConsumeKafka.png)
+
+## NiFi stateless
+A stateless NiFi instance executes a flow as a transactional microservice.
+The flow is defined in the NiFi Registry and the stateless instance is configured to reference it.
+
+### Load flow2 to NiFi Registry
+- Connect NiFi to use the NiFi Registry instance as documented here:
+    
+    [Connect NiFi to the Registry](https://nifi.apache.org/docs/nifi-registry-docs/html/getting-started.html#connect-nifi-to-the-registry)
+
+    Use `http://nifi-registry:18080` as the registry location.
+- Connect to the NiFi Registry UI and create a bucket named `stateless` are described here:
+    
+    [Create a bucket](https://nifi.apache.org/docs/nifi-registry-docs/html/getting-started.html#create-a-bucket)
+- Start the version control for `flow2`:
+![Start version control](images/version_control.png)
+![Start version control](images/version_stateless_flow.png)
