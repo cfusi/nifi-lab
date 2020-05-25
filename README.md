@@ -75,6 +75,7 @@ These steps create the needed docker containers:
   ```
   This container has hostname `nifi-registry`. You can connect to the NiFi Registry UI at the link: `http://localhost:18080/nifi-registry`
 
+
 ## Example flow
 These instructions will guide you to create a simple flow using both stateful and stateless NiFi. Kafka is the message bus.
 
@@ -174,3 +175,12 @@ Of course you do not have to start `flow2_pg`.
 If it worked, you will see messages in the queue in the process group `flow3_pg`
 ![Check](images/check.png)
 9 messages in this picture.
+
+## Clean up the docker containers
+When you are done, you can run the following docker commands:
+
+`docker container stop nifi-stateless nifi-registry nifi kafka zookeeper`
+
+`docker container rm -v nifi-stateless nifi-registry nifi kafka zookeeper`
+
+`docker network rm nifi-net`
