@@ -169,6 +169,8 @@ You can now access the NiFi UI and start:
 - flow1_pg: to populate `topic1`
 - flow3_pg: to verify that the stateless NiFi instance is actually consuming from the topic `topic1` and publishing to the topic `topic2`.
 
+Of course you do not have to start `flow2_pg`.
+
 If it worked, you will see messages in the queue in the process group `flow3_pg`
 ![Check](images/check.png)
 9 messages in this picture.
