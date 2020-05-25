@@ -1,4 +1,4 @@
-#Intro
+# Intro
 This project shows how to set up NiFi environment with:
 * NiFi
 * NiFi Registry
@@ -15,7 +15,7 @@ These steps create the needed docker containers:
 
     `docker network create --driver bridge nifi-net`
     
-    All the containers will connect to this network
+    All the containers will connect to the network `nifi-net`
 - Run the Zookeeper container (needed for Kafka):
     ```
   docker run \
@@ -44,7 +44,7 @@ These steps create the needed docker containers:
        --env "KAFKA_CREATE_TOPICS=test" \
        wurstmeister/kafka:latest
   ```
-  This container has hostname `kafka`. When the container is started, a `topic` named test gets created.
+  This container has hostname `kafka`. When the container is started, a topic named `test` gets created.
   
   If you want to create more topics, specify a comma separated list of names.
   
@@ -139,6 +139,36 @@ The flow is defined in the NiFi Registry and the stateless instance is configure
 - Connect to the NiFi Registry UI and create a bucket named `stateless` are described here:
     
     [Create a bucket](https://nifi.apache.org/docs/nifi-registry-docs/html/getting-started.html#create-a-bucket)
-- Start the version control for `flow2`:
-![Start version control](images/version_control.png)
+- Start the version control for `flow2` (right click on `flow2_pg` and `Version -> Start version control` and specify the following values:
 ![Start version control](images/version_stateless_flow.png)
+- In the UI of NiFi Registry, open the versioned flow and get the flow ID and the bucket ID:
+![Registry IDs](images/registry_ids.png)
+
+- Create the file `flow.json` with the following content using the current values for the bucketId and the flowId:
+```
+{
+  "registryUrl": "http://nifi-registry:18080",
+  "bucketId": "9a305d25-5f84-4c57-adf0-5d0538d7325b",
+  "flowId": "335dff0b-59ce-4804-ab28-4c4418b1dd0b"
+}
+```
+
+- Create the stateless NiFi container with the following command:
+```
+docker run \
+   --name nifi-stateless \
+   --hostname nifi-stateless \
+   --network nifi-net \
+   -d \
+   apache/nifi-stateless:latest RunFromRegistry Continuous --json "$(cat ./flow.json)"
+```
+
+Now the stateless NiFi flow is active.
+
+You can now access the NiFi UI and start:
+- flow1_pg: to populate `topic1`
+- flow2_pg: to verify that the stateless NiFi instance is actually consuming from the topic `topic1` and publishing to the topic `topic2`.
+
+If it worked, you will see messages only queue present in the process group `flow3_pg`
+![Check](images/check.png)
+9 messages in this picture.
