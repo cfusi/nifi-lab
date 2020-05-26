@@ -75,7 +75,24 @@ These steps create the needed docker containers:
   ```
   This container has hostname `nifi-registry`. You can connect to the NiFi Registry UI at the link: `http://localhost:18080/nifi-registry`
 
-
+- To debug Kafka messages, you can use the utility `kafkacat` (see [here](https://github.com/edenhill/kafkacat)):
+    - List the topics
+        ```
+        docker run --tty \
+               --network nifi-net \
+               confluentinc/cp-kafkacat \
+               kafkacat -b kafka:9092 \
+               -L
+        ```
+    - Consume messages from a topic
+        ```
+        docker run --tty \
+               --network nifi-net \
+               edenhill/kafkacat:1.5.0 \
+               kafkacat -b kafka:9092 -C -K: \
+                        -f '\nHeaders: %h\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' \
+                        -t test
+      ```
 ## Example flow
 These instructions will guide you to create a simple flow using both stateful and stateless NiFi. Kafka is the message bus.
 
