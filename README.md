@@ -127,7 +127,7 @@ All the relationships are terminated
 This flow consumes flow files from `topic1` and queues them to the topic `topic2`.
 It will run in the stateless NiFi instance.
 However, you need to create it in the main NiFi instance. It will then be loaded to NiFi Registry, from where the NiFi stateless instance will take it.
-Connect to NiFi and create the Process Group `flow1_pg`:
+Connect to NiFi and create the Process Group `flow2_pg`:
 ![Process Group flow2_pg](images/flow2_pg.png)
 
 The Kafka consumer is configured as follows:
