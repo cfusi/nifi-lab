@@ -163,7 +163,7 @@ The flow is defined in the NiFi Registry and the stateless instance is configure
 ![Registry IDs](images/registry_ids.png)
 
 - Create the file `flow.json` with the following content using the current values for the registry URL, bucketId and the flowId:
-```
+```json
 {
   "registryUrl": "http://nifi-registry:18080",
   "bucketId": "9a305d25-5f84-4c57-adf0-5d0538d7325b",
